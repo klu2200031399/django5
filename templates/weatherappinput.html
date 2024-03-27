@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- Add necessary CSS and JavaScript files, if any -->
+</head>
+<body>
+  {% block body %}
+    {% include 'Navbar.html' %} <!-- Assuming Navbar.html contains your navigation bar -->
+
+    <div class="container">
+      <div class="row">
+        <div class="col order-last">
+          <!-- First in DOM, ordered last -->
+          <div>
+            <form method="post" action="{% url 'weatherlogic' %}">
+              {% csrf_token %}
+              <br>
+              <h4>
+                <label>Enter the city name :</label>
+                <input type="text" name="place">
+                <br><br>
+                <button type="submit" class="btn btn-success btn-lg">Check Temperature</button>
+              </h4>
+            </form>
+          </div>
+        </div>
+        <div class="col">
+
+          Second in DOM, unordered
+
+           <h1>
+            {% if error_message %}
+              <p>{{ error_message }}</p>
+            {% else %}
+              <p>City: {{ city }}</p>
+              <p>Temperature: {{ temperature1 }} &#8451;</p>
+              <p>Humidity: {{ humidity }}%</p>
+            {% endif %}
+          </h1>
+          <br>
+          {{ ran1 }}
+        </div>
+      </div>
+    </div>
+
+  {% endblock %}
+</body>
+</html>
